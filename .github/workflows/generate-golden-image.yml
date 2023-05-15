@@ -12,25 +12,19 @@ jobs:
         uses: azure/login@v1
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
-      - name: BUILD GOLDEN RELEASE IMAGE
+      - name: Create App Baked Image
+        id: imageBuilder
         uses: azure/build-vm-image@v0
         with:
-          # Azure region
-          location: 'eastus'
-          # Resource Group, Duh
+          location: 'eastus2'
           resource-group-name: 'DEBIT-GithubActionsImageBuilder'
-          # managed identity for image building
-          managed-identity: 'GitHubActions-ImageBuilder'
-          # [windows | linux]
-          source-os-type: 'linux'
-          # publisher:offer:sku:version
-          source-image: 'Canonical:UbuntuServer:22.04-LTS:latest'
-          # Inject customizer scripts into the /root directory
-          customizer-source: ${{GITHUB.workspace}}/customizers
-          #customizer-destination: /root
-          # Run injected Scripts
-          customizer-script: | 
-            sudo apt install nginx -y
+          managed-identity: 'GithubActions-ImageBuilder' # Managed identity
+          source-os-type: 'windows'
+          source-image-type: 'platformImage'
+          source-image: MicrosoftWindowsServer:WindowsServer:2019-Datacenter:latest #unique identifier of source image
+          dist-type: 'SharedImageGallery'
+          dist-resource-id: '/subscriptions/a0cbc331-791e-4108-949b-89ea4df47e8e/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}/versions/0.1.${{ GITHUB.RUN_ID }}' #Replace with the resource id of your shared image  gallery's image definition
+          dist-location: 'eastus'
 
 
 
