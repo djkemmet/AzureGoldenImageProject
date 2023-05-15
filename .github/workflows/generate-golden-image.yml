@@ -26,10 +26,10 @@ jobs:
           source-image: 'Canonical:UbuntuServer:22.04-LTS:latest'
           # Inject customizer scripts into the /root directory
           customizer-source: ${{GITHUB.workspace}}/customizers
-          customizer-destination: /root
+          #customizer-destination: /root
           # Run injected Scripts
           customizer-script: | 
-            sudo bash /root/customizers/terraform.sh
+            sudo apt install nginx -y
 
 
 
