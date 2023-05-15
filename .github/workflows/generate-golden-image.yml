@@ -15,11 +15,12 @@ jobs:
       - name: BUILD GOLDEN RELEASE IMAGE
         uses: azure/build-vm-image@v0
         with:
+          # Azure region
+          location: 'eastus'
+          # Resource Group, Duh
           resource-group-name: 'DEBIT-GithubActionsImageBuilder'
           # managed identity for image building
           managed-identity: 'GitHubActions-ImageBuilder'
-          # Azure region
-          location: 'eastus'
           # [windows | linux]
           source-os-type: 'linux'
           # publisher:offer:sku:version
