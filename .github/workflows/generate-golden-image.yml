@@ -1,0 +1,37 @@
+name: Generate-Golden-Image
+run-name: ${{ github.actor}} has pushed to master, starting an image build.
+on:
+  push:
+    branches:
+      - "master"
+jobs:
+  BUILD-GOLDEN-RELEASE-IMAGE:
+    runs-on: ubuntu-latest
+    steps:
+      - name: LOGIN TO AZURE
+        uses: azure/login@v1
+        with:
+          creds: ${{secrets.AZURE_CREDENTIAL}}
+      - name: BUILD GOLDEN RELEASE IMAGE
+        uses: azure/built-vm-image@v0
+        with:
+          resource-group-name: 'DEBIT-GithubActionsImageBuilder'
+          # managed identity for image building
+          managed-identity: 'GitHubActions-ImageBuilder'
+          # Azure region
+          location: 'eastus'
+          # [windows | linux]
+          source-os-type: 'linux'
+          # publisher:offer:sku:version
+          source-image: 'Canonical:UbuntuServer:22.04-LTS:latest'
+          # Inject customizer scripts into the /root directory
+          customizer-source: ${{GITHUB.workspace}}/customizers
+          customizer-destination: /root
+          # Run injected Scripts
+          customizer-script: | 
+            sudo bash /root/customizers/terraform.sh
+
+
+
+
+          
