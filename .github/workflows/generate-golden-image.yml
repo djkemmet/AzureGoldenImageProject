@@ -11,7 +11,7 @@ jobs:
       - name: LOGIN TO AZURE
         uses: azure/login@v1
         with:
-          creds: ${{secrets.AZURE_CREDENTIAL}}
+          creds: '${{secrets.AZURE_CREDENTIAL}}'
       - name: BUILD GOLDEN RELEASE IMAGE
         uses: azure/build-vm-image@v0
         with:
