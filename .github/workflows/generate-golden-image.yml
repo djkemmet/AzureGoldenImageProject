@@ -16,9 +16,9 @@ jobs:
         id: imageBuilder
         uses: azure/build-vm-image@v0
         with:
-          location: 'eastus2'
-          resource-group-name: 'DEBIT-GithubActionsImageBuilder'
-          managed-identity: 'GithubActions-ImageBuilder' # Managed identity
+          location: 'eastus'
+          resource-group-name: 'GitHub-ImageBuild'
+          managed-identity: 'GithubActions_ImageBuilder' # Managed identity
           source-os-type: 'windows'
           source-image-type: 'platformImage'
           source-image: MicrosoftWindowsServer:WindowsServer:2019-Datacenter:latest #unique identifier of source image
