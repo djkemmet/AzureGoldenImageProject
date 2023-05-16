@@ -22,9 +22,9 @@ jobs:
           source-os-type: 'windows'
           source-image-type: 'platformImage'
           source-image: MicrosoftWindowsServer:WindowsServer:2019-Datacenter:latest #unique identifier of source image
-#           dist-type: 'SharedImageGallery'
-#           dist-resource-id: '/subscriptions/a0cbc331-791e-4108-949b-89ea4df47e8e/resourceGroups/{rgName}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageName}/versions/0.1.${{ GITHUB.RUN_ID }}' #Replace with the resource id of your shared image  gallery's image definition
-#           dist-location: 'eastus'
+          dist-type: 'SharedImageGallery'
+          dist-resource-id: '/subscriptions/a0cbc331-791e-4108-949b-89ea4df47e8e/resourceGroups/GitHub-ImageBuild/providers/Microsoft.Compute/galleries/GithubActions_ImageBuildGallery/images/G2VM-Windows10-Client/versions/0.1.${{ GITHUB.RUN_ID }}' #Replace with the resource id of your shared image  gallery's image definition
+          dist-location: 'eastus'
 
 
 
