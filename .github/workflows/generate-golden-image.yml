@@ -17,11 +17,11 @@ jobs:
         uses: azure/build-vm-image@v0
         with:
           location: 'eastus'
-          resource-group-name: 'GitHub-ImageBuild'
-          managed-identity: 'GithubActions_ImageBuilder' # Managed identity
+          resource-group-name: 'GithubAction-ImageBuilder'
+          managed-identity: '/subscriptions/a0cbc331-791e-4108-949b-89ea4df47e8e/resourcegroups/GithubAction-ImageBuilder/providers/Microsoft.ManagedIdentity/userAssignedIdentities/GithubActions_ImageBuilder' # Managed identity
           source-os-type: 'windows'
-          source-image-type: 'platformImage'
-          source-image: MicrosoftWindowsServer:WindowsServer:2019-Datacenter:latest #unique identifier of source image
+          source-image-type: 'SharedImageGallery'
+          source-image: MicrosoftWindowsDesktop:Windows-10:win10-21h2-pro-g2
           dist-type: 'SharedImageGallery'
-          dist-resource-id: '/subscriptions/a0cbc331-791e-4108-949b-89ea4df47e8e/resourceGroups/GitHub-ImageBuild/providers/Microsoft.Compute/galleries/GithubActions_ImageBuildGallery/images/G2VM-Windows10-Client/versions/0.1.${{ GITHUB.RUN_ID }}' #Replace with the resource id of your shared image  gallery's image definition
+          dist-resource-id: '/subscriptions/a0cbc331-791e-4108-949b-89ea4df47e8e/resourceGroups/GithubAction-ImageBuilder/providers/Microsoft.Compute/galleries/ADX_Core_Image_Gallery/images/SpecializedApplicationImage-ComputeGallery-Definition/versions/0.1.${{ GITHUB.RUN_ID }}' #Replace with the resource id of your shared image  gallery's image definition
           dist-location: 'eastus'
